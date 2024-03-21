@@ -10,6 +10,13 @@
 #' @param reference A BSgenome object with the reference genome to be used to retrieve flanking bases.
 #' @return A matrix with Single Base Substitutions (SBS) counts per patient.
 #' @export getSBSCounts
+#' @import BSgenome.Hsapiens.1000genomes.hs37d5
+#' @import GenomeInfoDb
+#' @import GenomicRanges
+#' @import IRanges
+#' @importFrom data.table data.table dcast .N
+#' @importFrom Biostrings DNAStringSet complement reverseComplement subseq
+#' @importFrom BSgenome getSeq
 #'
 getSBSCounts <- function(data, reference = NULL) {
 
@@ -113,11 +120,18 @@ getSBSCounts <- function(data, reference = NULL) {
 #'
 #' @title getMNVCounts
 #' @param data A data.frame with variants having 6 columns: sample name, chromosome, start position, end position, ref, alt.
+#' @param predefined_dbs_mbs Boolean. As defined by the function get_mut_type from the package MutationalPatterns, it specifies whether 
+#' dbs and mbs mutations have been predefined in the input data. This function by default assumes that dbs and mbs mutations are present 
+#' in the vcf as snvs, which are positioned next to each other. If your dbs/mbs mutations are called separately, you should set this 
+#' argument to TRUE.
 #' @return A matrix with Multi-Nucleotide Variants (MNVs) counts per patient.
 #' @export getMNVCounts
+#' @import GenomeInfoDb
+#' @import GenomicRanges
+#' @import IRanges
 #' @importFrom MutationalPatterns get_mut_type get_dbs_context count_dbs_contexts
 #'
-getMNVCounts <- function(data) {
+getMNVCounts <- function( data, predefined_dbs_mbs = FALSE ) {
 
     # preprocessing input data
     data <- as.data.frame(data)
@@ -130,7 +144,7 @@ getMNVCounts <- function(data) {
     # convert data to GRanges
     data <- GRanges(data$chrom, IRanges(start = data$pos, width = nchar(data$ref)), 
         ref = data$ref, alt = data$alt, sample = data$sample)
-    data <- get_mut_type(data, type = "dbs", predefined_dbs_mbs = FALSE)
+    data <- get_mut_type(data, type = "dbs", predefined_dbs_mbs = predefined_dbs_mbs)
     data <- get_dbs_context(data)
 
     # build counts matrix
@@ -205,12 +219,12 @@ getMNVCounts <- function(data) {
 #' @param reference A BSgenome object with the reference genome to be used.
 #' @return A matrix with Small Insertions and Deletions (IDs) counts per patient.
 #' @export getIDCounts
-#' @import IRanges
-#' @import GenomeInfoDb
 #' @import BSgenome.Hsapiens.1000genomes.hs37d5
-#' @importFrom GenomicRanges GRanges
-#' @importFrom S4Vectors metadata
+#' @import GenomeInfoDb
+#' @import GenomicRanges
+#' @import IRanges
 #' @importFrom MutationalPatterns get_mut_type get_indel_context count_indel_contexts
+#' @importFrom S4Vectors metadata
 #'
 getIDCounts <- function(data, reference = NULL) {
 
