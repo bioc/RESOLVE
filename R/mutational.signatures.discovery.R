@@ -128,6 +128,7 @@ signaturesAssignment <- function( x, beta ) {
 #' @import glmnet
 #' @import lsa
 #' @import nnls
+#' @import RhpcBLASctl
 #' @import parallel
 #'
 signaturesDecomposition <- function( x, K, background_signature = NULL,
@@ -175,6 +176,8 @@ signaturesDecomposition <- function( x, K, background_signature = NULL,
         res_clusterEvalQ <- clusterEvalQ(parallel, library("lsa", warn.conflicts = FALSE,
             quietly = TRUE, verbose = FALSE))
         res_clusterEvalQ <- clusterEvalQ(parallel, library("nnls", warn.conflicts = FALSE,
+            quietly = TRUE, verbose = FALSE))
+        res_clusterEvalQ <- clusterEvalQ(parallel, library("RhpcBLASctl", warn.conflicts = FALSE,
             quietly = TRUE, verbose = FALSE))
         clusterExport(parallel, varlist = c(".fit_nmf", ".fit_seed", ".fit_regularized",
             ".fit_objective"), envir = environment())
@@ -395,6 +398,7 @@ signaturesDecomposition <- function( x, K, background_signature = NULL,
 #' @import glmnet
 #' @import lsa
 #' @import nnls
+#' @import RhpcBLASctl
 #' @import parallel
 #'
 signaturesCV <- function( x, beta, normalize_counts = FALSE, cross_validation_entries = 0.01,
@@ -529,6 +533,8 @@ signaturesCV <- function( x, beta, normalize_counts = FALSE, cross_validation_en
         res_clusterEvalQ <- clusterEvalQ(parallel, library("lsa", warn.conflicts = FALSE,
             quietly = TRUE, verbose = FALSE))
         res_clusterEvalQ <- clusterEvalQ(parallel, library("nnls", warn.conflicts = FALSE,
+            quietly = TRUE, verbose = FALSE))
+        res_clusterEvalQ <- clusterEvalQ(parallel, library("RhpcBLASctl", warn.conflicts = FALSE,
             quietly = TRUE, verbose = FALSE))
         clusterExport(parallel, varlist = c(".fit_model", "signaturesAssignment", "verbose", 
             "cross_validation_repetitions", "cross_validation_entries"), envir = environment())
