@@ -67,3 +67,33 @@ NULL
 #' @source List data structure to run examples.
 #' @return List data structure to run examples
 NULL
+
+#' @name sbs_assignments
+#' @title SBS assignments for 560 breast tumors
+#' @description SBS assignments from 560 breast tumors published in Nik-Zainal, Serena, et al. (2016).
+#' @docType data
+#' @usage data(sbs_assignments)
+#' @format SBS assignments inferred by RESOLVE from 560 breast tumors published in Nik-Zainal, Serena, et al. (2016)
+#' @source Nature. 2016 Jun 2;534(7605):47-54 (https://www.nature.com/articles/nature17676).
+#' @return SBS assignments inferred by RESOLVE
+NULL
+
+#' @name association_mutations
+#' @title List providing mutations as binary variables and signatures assignments for 656 breast cancer patients
+#' @description Mutations and SBS assignments for 656 breast tumors from ICGC.
+#' @docType data
+#' @usage data(association_mutations)
+#' @format List providing mutations as binary variables and signatures assignments for 656 breast cancer patients from ICGC (https://dcc.icgc.org/)
+#' @source ICGC data portal (https://dcc.icgc.org/).
+#' @return Mutations and SBS assignments
+NULL
+
+#' @name association_survival
+#' @title List providing clinical data and signatures assignments for 359 pancreatic cancer patients
+#' @description Clinical data and SBS assignments for 359 pancreatic tumors from ICGC.
+#' @docType data
+#' @usage data(association_survival)
+#' @format List providing clinical data and signatures assignments for 359 pancreatic cancer patients from ICGC (https://dcc.icgc.org/)
+#' @source ICGC data portal (https://dcc.icgc.org/).
+#' @return Clinical data and SBS assignments
+NULL
