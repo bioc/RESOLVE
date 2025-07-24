@@ -11,7 +11,7 @@
 #' @return A matrix with Single Base Substitutions (SBS) counts per patient.
 #' @export getSBSCounts
 #' @import BSgenome.Hsapiens.1000genomes.hs37d5
-#' @import GenomeInfoDb
+#' @import Seqinfo
 #' @import GenomicRanges
 #' @import IRanges
 #' @importFrom data.table data.table dcast .N
@@ -126,7 +126,7 @@ getSBSCounts <- function(data, reference = NULL) {
 #' argument to TRUE.
 #' @return A matrix with Multi-Nucleotide Variants (MNVs) counts per patient.
 #' @export getMNVCounts
-#' @import GenomeInfoDb
+#' @import Seqinfo
 #' @import GenomicRanges
 #' @import IRanges
 #' @importFrom MutationalPatterns get_mut_type get_dbs_context count_dbs_contexts
@@ -220,7 +220,7 @@ getMNVCounts <- function( data, predefined_dbs_mbs = FALSE ) {
 #' @return A matrix with Small Insertions and Deletions (IDs) counts per patient.
 #' @export getIDCounts
 #' @import BSgenome.Hsapiens.1000genomes.hs37d5
-#' @import GenomeInfoDb
+#' @import Seqinfo
 #' @import GenomicRanges
 #' @import IRanges
 #' @importFrom MutationalPatterns get_mut_type get_indel_context count_indel_contexts
